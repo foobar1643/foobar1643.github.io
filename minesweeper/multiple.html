@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Minesweeper Game - Multiple fields</title>
+        <link rel="stylesheet" href="css/style.css">
+        <script src="js/EventDispatcher.js"></script>
+        <script src="js/Popup.js"></script>
+        <script src="js/MinesweeperGame.js"></script>
+        <script>
+            window.onload = function() {
+                Object.assign(Game.prototype, EventDispatcher.prototype);
+                var model = new Game();
+                for(var i = 1; i < 6; i++) {
+                    var view = new DOMview(model, document.getElementById("game-table" + i));
+                    var controller = new MouseController(model, view);
+                    view.createField();
+                    controller.addEventListeners();
+                }
+            };
+        </script>
+    </head>
+    <body>
+        <table id="game-table1" class="minesweeper"></table>
+        <table id="game-table2" class="minesweeper"></table>
+        <table id="game-table3" class="minesweeper"></table>
+        <table id="game-table4" class="minesweeper"></table>
+        <table id="game-table5" class="minesweeper"></table>
+        <div id="popup-dummy" class="popup" style="display: none;">
+            <div class="popup-content">
+                <div class="popup-title">
+                    <h3>Headline</h3>
+                </div>
+                <div class="popup-message">
+                    <span>Message</span>
+                </div>
+                <div class="popup-control">
+                    <button type="button" class="popup-button">Close window</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</body>
